@@ -1,10 +1,11 @@
 import { FlatList, SafeAreaView, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Screen from "../components/Screen";
-import ListItem from "../components/ListItem"; // Ensure ListItem is correctly imported
-import AppText from "../components/AppText";
+import ListItem from "../components/ListItem";
+import ListItemSeparator from "../components/ListItemSeparator";
+import ListItemDeleteAction from "../components/ListItemDeleteAction";
 
-const messages = [
+const initialMessages = [
   {
     id: 1,
     title: "T1",
@@ -26,6 +27,13 @@ const messages = [
 ];
 
 const MessagesScreen = () => {
+  const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleDelete = (message) => {
+    const newMessages = messages.filter((m) => m.id != message.id);
+    setMessages(newMessages);
+  };
   return (
     <Screen>
       <FlatList
@@ -36,8 +44,24 @@ const MessagesScreen = () => {
             title={item.title}
             subtitle={item.description}
             image={item.image}
+            onPress={() => {}}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
           />
         )}
+        ItemSeparatorComponent={ListItemSeparator}
+        refreshing={refreshing}
+        onRefresh={() =>
+          setMessages([
+            {
+              id: 1,
+              title: "T1",
+              description: "D1",
+              image: require("@/assets/images/react-logo.png"),
+            },
+          ])
+        }
       />
     </Screen>
   );
