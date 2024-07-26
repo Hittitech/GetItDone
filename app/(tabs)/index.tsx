@@ -7,6 +7,8 @@ import {
   Pressable,
   Button,
   Alert,
+  TextInput,
+  Switch,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDeviceOrientation } from "@react-native-community/hooks";
@@ -14,38 +16,51 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import ViewImageScreen from "../screens/ViewImageScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Card from "../components/Card";
+import ListingDetailScreen from "../screens/ListingDetailScreen";
+import MessagesScreen from "../screens/MessagesScreen";
+import Screen from "../components/Screen";
+import Icon from "../components/Icon";
+import ListItem from "../components/ListItem";
+import AccountScreen from "../screens/AccountScreen";
+import ListingScreen from "../screens/ListingScreen";
+import AppTextInput from "../components/AppTextInput";
+import AppPicker from "../components/AppPicker";
+import { useState } from "react";
 
-import AppText from "../components/AppText.jsx";
-import AppButton from "../components/AppButton";
+const categories = [
+  {
+    value: 1,
+    label: "mobiles",
+  },
+  {
+    value: 2,
+    label: "tablets",
+  },
+  {
+    value: 3,
+    label: "precious",
+  },
+];
 
 export default function HomeScreen() {
+  const [category, setCategory] = useState();
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: "#f8f4f4",
-          padding: 20,
-          paddingTop: 100,
-        },
-      ]}
-    >
-      <Card
-        title={"Red Jacket For Sale"}
-        subTitle={"$100"}
-        link={""}
-        image={require("@/assets/images/jacket.jpg")}
+    <Screen style={styles.container}>
+      <AppPicker
+        selectedItem={category}
+        //@ts-ignore
+        onSelectItem={(item) => setCategory(item)}
+        items={categories}
+        placeholder={"category"}
+        icon={"apps"}
       />
-    </View>
+      <AppTextInput placeholder="email" icon={"email"} />
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
