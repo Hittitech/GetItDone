@@ -3,26 +3,29 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "@/app/config/colors";
+import Screen from "../components/Screen";
 
 const ViewImageScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.closeIcon}>
-        <MaterialCommunityIcons name="close" size={35} color={"white"} />
-      </View>
-      <View style={styles.deleteIcon}>
-        <MaterialCommunityIcons
-          name="trash-can-outline"
-          size={35}
-          color={"white"}
+    <Screen>
+      <View style={styles.container}>
+        <View style={styles.closeIcon}>
+          <MaterialCommunityIcons name="close" size={35} color={"white"} />
+        </View>
+        <View style={styles.deleteIcon}>
+          <MaterialCommunityIcons
+            name="trash-can-outline"
+            size={35}
+            color={"white"}
+          />
+        </View>
+        <Image
+          resizeMode="contain"
+          style={styles.image}
+          source={require("../../assets/images/view-image.jpeg")}
         />
       </View>
-      <Image
-        resizeMode="contain"
-        style={styles.image}
-        source={require("../../assets/images/view-image.jpeg")}
-      />
-    </View>
+    </Screen>
   );
 };
 

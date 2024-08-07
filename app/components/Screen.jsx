@@ -5,15 +5,20 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Screen = ({ children, style }) => {
   return (
-    <SafeAreaView style={[styles.container, style]}>
-      <GestureHandlerRootView>{children}</GestureHandlerRootView>
+    <SafeAreaView style={[styles.screen, style]}>
+      <GestureHandlerRootView style={[styles.view, style]}>
+        {children}
+      </GestureHandlerRootView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     backgroundColor: "#fff",
+    flex: 1,
+  },
+  view: {
     flex: 1,
   },
 });

@@ -25,36 +25,16 @@ import AccountScreen from "../screens/AccountScreen";
 import ListingScreen from "../screens/ListingScreen";
 import AppTextInput from "../components/AppTextInput";
 import AppPicker from "../components/AppPicker";
-import { useState } from "react";
-
-const categories = [
-  {
-    value: 1,
-    label: "mobiles",
-  },
-  {
-    value: 2,
-    label: "tablets",
-  },
-  {
-    value: 3,
-    label: "precious",
-  },
-];
+import * as ImagePicker from "expo-image-picker";
+import { useEffect, useState } from "react";
+import LoginScreen from "../screens/LoginScreen";
+import ImageInputList from "../components/imageInputList";
+import ListingEditScreen from "../screens/ListingEditScreen";
 
 export default function HomeScreen() {
-  const [category, setCategory] = useState();
   return (
     <Screen style={styles.container}>
-      <AppPicker
-        selectedItem={category}
-        //@ts-ignore
-        onSelectItem={(item) => setCategory(item)}
-        items={categories}
-        placeholder={"category"}
-        icon={"apps"}
-      />
-      <AppTextInput placeholder="email" icon={"email"} />
+      <ListingEditScreen />
     </Screen>
   );
 }

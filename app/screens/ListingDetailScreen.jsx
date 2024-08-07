@@ -3,26 +3,29 @@ import React from "react";
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItem";
+import Screen from "../components/Screen";
 
 const ListingDetailScreen = () => {
   return (
-    <View>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/jacket.jpg")}
-      />
-      <View style={styles.textContainer}>
-        <AppText style={styles.title}>Red Jacket For Sale</AppText>
-        <AppText style={styles.price}>$100</AppText>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("@/assets/images/react-logo.png")}
-            title={"Adnan Sami"}
-            subtitle={"5 listings"}
-          />
+    <Screen>
+      <View>
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/jacket.jpg")}
+        />
+        <View style={styles.textContainer}>
+          <AppText style={styles.title}>Red Jacket For Sale</AppText>
+          <AppText style={styles.price}>$100</AppText>
+          <View style={styles.userContainer}>
+            <ListItem
+              image={require("@/assets/images/react-logo.png")}
+              title={"Adnan Sami"}
+              subtitle={"5 listings"}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </Screen>
   );
 };
 

@@ -22,7 +22,10 @@ const AppPicker = ({
   placeholder,
   items,
   onSelectItem,
+  PickerItemComponent = PickerItem,
   selectedItem,
+  width = "100%",
+  numberOfColumns = 1,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [category, setCategory] = useState(items[0]);
@@ -34,7 +37,7 @@ const AppPicker = ({
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -43,9 +46,11 @@ const AppPicker = ({
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name={"chevron-down"}
             size={20}
@@ -58,8 +63,13 @@ const AppPicker = ({
         <FlatList
           data={items}
           keyExtractor={(item) => item.value.toString()}
+          numColumns={numberOfColumns}
           renderItem={({ item }) => (
-            <PickerItem label={item.label} onPress={() => handlePress(item)} />
+            <PickerItemComponent
+              item={item}
+              label={item.label}
+              onPress={() => handlePress(item)}
+            />
           )}
         />
       </Modal>
@@ -81,6 +91,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyles.colors.medium,
+    flex: 1,
   },
   text: {
     flex: 1,
